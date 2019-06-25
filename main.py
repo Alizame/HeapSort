@@ -1,5 +1,5 @@
-# -*- coding: utf-8 -*-
 """Sorts an array from a file and prints intermediate steps + the sorted array"""
+
 import math
 
 file = "data.txt"
