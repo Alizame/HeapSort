@@ -1,6 +1,7 @@
 """Sorts an array from a file and prints intermediate steps + the sorted array"""
 
 import math
+from typing import List
 
 FILE = "data.txt"
 MY_ARRAY = []
@@ -14,7 +15,7 @@ except ValueError:
     exit()
 
 
-def _get(a, i, default=None):
+def _get(a: List[int], i: int, default=None):
     """Returns the number of the index of the array"""
     try:
         return a[i]
@@ -22,7 +23,7 @@ def _get(a, i, default=None):
         return default
 
 
-def heap_seepin(a, node_index, last_index=None):
+def heap_seepin(a: List[int], node_index: int, last_index: int = None) -> None:
     """Lets a number seep into the heap"""
     last_index = last_index if last_index is not None else len(a) - 1
 
@@ -46,7 +47,7 @@ def heap_seepin(a, node_index, last_index=None):
     pprint_tree(a, "heap_seepin-")
 
 
-def heapify(a):
+def heapify(a: List[int]) -> None:
     """Heapify the array"""
     if is_heap(a):
         return
@@ -56,7 +57,7 @@ def heapify(a):
     pprint_tree(a)
 
 
-def is_heap(a, i=0):
+def is_heap(a: List[int], i: int = 0) -> bool:
     """Checks whether the array is a heap(heap characteristic fulfilled) or not"""
     n = len(a)
     if i > int((n - 2) / 2):  # if leaf node return true, leafs can't break heap-condition
@@ -71,7 +72,7 @@ def is_heap(a, i=0):
     return False
 
 
-def heapsort(a):
+def heapsort(a: List[int]) -> None:
     """Heapsort algorithm, sorts the array"""
     heapify(a)  # convert a to heap
     assert is_heap(a)
@@ -82,12 +83,12 @@ def heapsort(a):
         last_element -= 1
 
 
-def height(i):
+def height(i: int) -> int:
     """Returns the height of the heap at index i"""
     return int(math.log(1 + i, 2))
 
 
-def print_as_tree(a):
+def print_as_tree(a: List[int]) -> None:
     """Prints an array as a tree like structure"""
     left = lambda i: i * 2 + 1
     right = lambda i: i * 2 + 2
