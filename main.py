@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+"""Sorts an array from a file and prints intermediate steps + the sorted array"""
 import math
 
 file = "data.txt"
@@ -13,6 +15,7 @@ except ValueError:
 
 
 def _get(a, i, default=None):
+    """Returns the number of the index of the array"""
     try:
         return a[i]
     except IndexError as _:
@@ -20,6 +23,7 @@ def _get(a, i, default=None):
 
 
 def heap_seepin(a, node_index, last_index=None):
+    """Lets a number seep into the heap"""
     last_index = last_index if last_index is not None else len(a) - 1
 
     left_child_index = node_index * 2 + 1  # +1 because lists start at 0
@@ -43,6 +47,7 @@ def heap_seepin(a, node_index, last_index=None):
 
 
 def heapify(a):
+    """Heapify the array"""
     if is_heap(a):
         return
 
@@ -52,6 +57,7 @@ def heapify(a):
 
 
 def is_heap(a, i=0):
+    """Checks whether the array is a heap(heap characteristic fulfilled) or not"""
     n = len(a)
     if i > int((n - 2) / 2):  # if leaf node return true, leafs can't break heap-condition
         return True
@@ -66,6 +72,7 @@ def is_heap(a, i=0):
 
 
 def heapsort(a):
+    """Heapsort algorithm, sorts the array"""
     heapify(a)  # convert a to heap
     assert is_heap(a)
     le = len(a)-1
@@ -76,10 +83,12 @@ def heapsort(a):
 
 
 def height(i):
+    """Returns the height of the heap at index i"""
     return int(math.log(1+i, 2))
 
 
 def print_as_tree(a, i=0):
+    """Prints an array as a tree like structure"""
     left = lambda i: i * 2 + 1
     right = lambda i: i * 2 + 2
 
@@ -106,12 +115,16 @@ def print_as_tree(a, i=0):
 
 
 def pprint_tree(a, title=""):
+    """ Prints array tree like with a title"""
+    
     print(title, end="")
     print("Tree: \n\tArray: %s" % a)
     print_as_tree(a)
 
 
 if __name__ == "__main__":
+    """Main, sorts an array from a file and prints intermediate steps + the sorted array"""
+    
     pprint_tree(my_array, "unsorted/unheapified-")
     print("heapify: ")
     heapify(my_array)
@@ -124,3 +137,4 @@ if __name__ == "__main__":
     sorted_array = my_array.copy()  # check if really sorted:
     sorted_array.sort(reverse=True)
     assert list(my_array) == sorted_array
+
