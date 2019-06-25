@@ -59,8 +59,7 @@ def heapify(a: List[int]) -> None:
 
 def is_heap(a: List[int], i: int = 0) -> bool:
     """Checks whether the array is a heap(heap characteristic fulfilled) or not"""
-    n = len(a)
-    if i > int((n - 2) / 2):  # if leaf node return true, leafs can't break heap-condition
+    if i > int((len(a) - 2) / 2):  # if leaf node return true, leafs can't break heap-condition
         return True
 
     # If i-node is smaller than its children, and same is
