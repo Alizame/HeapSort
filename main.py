@@ -44,7 +44,7 @@ def heap_seepin(a: List[int], node_index: int, last_index: int = None) -> None:
                 heap_seepin(a, right_index, last_index)  # re-evaluate heap-condition of right-child
         except IndexError as _:
             pass
-    pprint_tree(a, "heap_seepin-")
+    pprint_tree(a, "heap_seepin(%s, %s)-" % (node_index, last_index))
 
 
 def heapify(a: List[int]) -> None:
@@ -59,7 +59,7 @@ def heapify(a: List[int]) -> None:
 
 def is_heap(a: List[int], i: int = 0) -> bool:
     """Checks whether the array is a heap(heap characteristic fulfilled) or not"""
-    if i > int((len(a) - 2) / 2):  # if leaf node return true, leafs can't break heap-condition
+    if i > len(a) // 2:  # if leaf node return true, leafs can't break heap-condition
         return True
 
     # If i-node is smaller than its children, and same is
@@ -75,11 +75,13 @@ def heapsort(a: List[int]) -> None:
     """Heapsort algorithm, sorts the array"""
     heapify(a)  # convert a to heap
     assert is_heap(a)
-    last_element = len(a) - 1
-    while last_element > 0:
-        a[0], a[last_element] = a[last_element], a[0]
-        heap_seepin(a, 0, last_element - 1)
-        last_element -= 1
+    last_heap_element = len(a) - 1
+    while last_heap_element > 0:
+        print("\t\tbefore swap\t%s" % a)
+        a[0], a[last_heap_element] = a[last_heap_element], a[0]
+        print("\t\tafter swap \t%s" % a)
+        heap_seepin(a, 0, last_heap_element - 1)
+        last_heap_element -= 1
 
 
 def height(i: int) -> int:
